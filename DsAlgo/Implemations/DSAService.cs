@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DsAlgo
 {
-   public class DSAService: IDSAService
+    public class DSAService : IDSAService
     {
         /// <summary>
         /// https://leetcode.com/problems/two-sum/submissions/
@@ -38,7 +39,7 @@ namespace DsAlgo
         /// <param name="list"></param>
         /// <returns></returns>
         public Stack<int> ReverseStack(Stack<int> list)
-        {         
+        {
             if (list.ListLength() > 0)
             {
 
@@ -73,9 +74,44 @@ namespace DsAlgo
             return list;
         }
 
+        /// <summary>
+        /// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public IList<string> LetterCombinations(int digits)
+        {
+
+            // check induvidual digits are >2 <9
+            //if (Regex.IsMatch(digits, "^\\d+$"))
+            //{
+
+            //}
+
+            // get value of digits each
+            for (int i = 0; i <= digits.ToString().Length - 1; i++)
+            {
+                var r = digits.ToString().Substring(i, 1);
+                var t = Enum.GetValues(typeof(LetterCombinationsList)).GetValue(2 - 2).ToString();
+                for (i = 0; i <= t.Length - 1; i++)
+                {
+                    var rr = t.Split("");
+                }
+            }
+
+
+            // get combination of  of digits each
+
+            //Combine each
+            return null;
+        }
+
+
         public int Fibbonaci(int i)
         {
             return 1;
         }
+
+
     }
 }
