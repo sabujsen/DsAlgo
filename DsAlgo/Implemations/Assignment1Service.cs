@@ -1,4 +1,5 @@
 ﻿using DsAlgo.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DsAlgo.Implemations
@@ -42,6 +43,33 @@ namespace DsAlgo.Implemations
             }
             return calculateMostWaterAreaMax;
         }
-    
+
+        public int RemoveConsecutiveSame(List<string> list)
+        {
+            var myStack = new Stack<string>();
+            list.ForEach((single) =>
+            {
+                if (myStack.ListLength() == 0)
+                {
+                    myStack.PUSH(single);
+                }
+                else
+                {
+                    var topStack = myStack.PEEK();
+                    if (topStack == single)
+                    {
+                        myStack.POP();
+                    }
+                    else
+                    {
+                        myStack.PUSH(single);
+                    }
+                }
+            });
+
+            return (myStack.ListLength());
+
+        }
+
     }
 }

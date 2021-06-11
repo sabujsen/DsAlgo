@@ -1,19 +1,36 @@
 ﻿using DsAlgo.Implemations;
 using DsAlgo.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace DsAlgo
 {
     class Program
     {
-      
+
         static IAssignment1Service assignment1Service = new Assignment1Service();
         static IDSAService dsaservice = new DSAService();
         static void Main(string[] args)
         {
-            int[] arr = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7};
-           // int[] arr = new int[] { 1, 2, 3, 4, 5, 25, 24, 3, 4 };
-            var r= assignment1Service.MostWaterArea(arr);
+            int[] arr = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+            // int[] arr = new int[] { 1, 2, 3, 4, 5, 25, 24, 3, 4 };
+            //  var response = assignment1Service.MostWaterArea(arr);
+
+            List<string> v = new List<string>();
+
+            //v.Add("tom");
+            //v.Add("jerry");
+            //v.Add("jerry");
+            //v.Add("tom");
+
+            v.Add("ab");
+            v.Add("aa");
+            v.Add("aa");
+            v.Add("bcd");
+            v.Add("ab");
+
+            var response = assignment1Service.RemoveConsecutiveSame(v);
+            Console.WriteLine("Response : {0}", response);
 
 
             //var rr = dsaservice.LetterCombinations(23);
