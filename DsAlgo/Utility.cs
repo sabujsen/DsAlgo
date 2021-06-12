@@ -22,9 +22,7 @@ namespace DsAlgo
             this.data = data;
         }
     }
-    class Utility
-    {
-    }
+
     public class Stack<T>
     {
         private int top = 0;
@@ -84,4 +82,135 @@ namespace DsAlgo
             return dataList[i];
         }
     }
+
+    public class CircularQueue<T>
+    {
+        int front, rear = -1;
+        int capacity = 0;
+        private T[] queue ;
+
+        public CircularQueue(int _capacity)
+        {
+            this.capacity = _capacity;
+            queue = new T[_capacity];
+            front= rear = -1;
+        }
+
+        public void EnQueue(T element)
+        {
+            // check queue is full
+            if ((front == 0 && rear == capacity - 1) || (rear == (front - 1) % (capacity - 1)))
+            {
+                Console.WriteLine("Queue is Full");
+                throw new Exception("Queue is full");
+            }
+
+            if ((front == -1) && (rear == -1))
+            {
+                front = 0;
+                rear = 0;
+                queue[0] = element;
+            }
+            else
+            {
+                var positiontoAdd =  (rear + 1) % capacity;
+                front = 0;
+                rear = (rear+1) ;
+                queue[positiontoAdd] = element;
+            }            
+        }
+        public T DeQueue()
+        {
+            T temp;
+            if (IsEmpty())
+            {
+                throw new NullReferenceException("List is empty");
+            }
+            temp = queue[front];
+            // Condition for only one element
+            if (front == rear)
+            {
+                front = -1;
+                rear = -1;
+            }
+            else
+            {
+                var positiontoRemove = (front + 1) % capacity;
+                front = positiontoRemove;
+            }
+            return temp;
+        }
+        public T Peek()
+        {
+            if(IsEmpty())
+            {
+                Console.WriteLine("Queue is Empty");
+                // throw new Exception("Queue is empty");
+            }
+            return queue[front];
+        }
+        public bool IsEmpty()
+        {
+            //if ((front == 0 && rear == capacity - 1) || (rear == (front - 1) % (capacity - 1)))
+            //{
+            //    return false;
+            //}
+            return front==-1;
+        }
+        public bool IsFull()
+        {           
+            return rear++%capacity==front;
+        }
+        public void DisplayQueue()
+        {
+
+            // Condition for empty queue.
+            if (front == -1)
+            {
+                Console.WriteLine("Queue is Empty");
+                return;
+            }
+
+            // If rear has not crossed the max size
+            // or queue rear is still greater then
+            // front.
+            Console.WriteLine("Elements in the circular queue are: ");
+
+            if (rear >= front)
+            {
+
+                // Loop to print elements from
+                // front to rear.
+                for (int i = front; i <= rear; i++)
+                {
+                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(" ");
+                }
+                Console.WriteLine();
+            }
+
+            // If rear crossed the max index and
+            // indexing has started in loop
+            else
+            {
+
+                // Loop for printing elements from
+                // front to max size or last index
+                for (int i = front; i < capacity; i++)
+                {
+                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(" ");
+                }
+
+                // Loop for printing elements from
+                // 0th index till rear position
+                for (int i = 0; i <= rear; i++)
+                {
+                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(" ");
+                }
+                Console.WriteLine();
+            }
+        }
+        }
 }

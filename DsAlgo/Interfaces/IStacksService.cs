@@ -2,6 +2,12 @@
 {
     public interface IStacksService
     {
+        //10. Maximal Rectangle
+        //https://leetcode.com/problems/maximal-rectangle/
+
+        //https://codingrecipies.blogspot.com/2019/06/largest-area-in-histogram.html
+
+
         //        1. Validate Stack Sequence
         //https://codingrecipies.blogspot.com/2020/01/validate-stack-sequence.html
 
@@ -38,8 +44,7 @@
         //https://codingrecipies.blogspot.com/2019/06/largest-area-in-histogram.html
 
 
-        //10. Maximal Rectangle
-        //https://leetcode.com/problems/maximal-rectangle/
+
 
 
         //11. Trapping Rain water

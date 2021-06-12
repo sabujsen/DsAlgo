@@ -29,10 +29,24 @@ namespace DsAlgo
             v.Add("bcd");
             v.Add("ab");
 
-            var response = assignment1Service.RemoveConsecutiveSame(v);
-            Console.WriteLine("Response : {0}", response);
+            //var response = assignment1Service.RemoveConsecutiveSame(v);
+            //Console.WriteLine("Response : {0}", response);
 
+            var circularQueue = new CircularQueue<int>(5);
 
+            circularQueue.EnQueue(14);
+            circularQueue.EnQueue(22);
+            circularQueue.EnQueue(13);
+            circularQueue.EnQueue(-6);
+
+          
+            circularQueue.EnQueue(9);
+            circularQueue.DisplayQueue();
+
+            int x = circularQueue.DeQueue();
+            x = circularQueue.DeQueue();
+
+            circularQueue.DisplayQueue();
             //var rr = dsaservice.LetterCombinations(23);
 
 
