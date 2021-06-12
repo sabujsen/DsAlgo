@@ -87,13 +87,13 @@ namespace DsAlgo
     {
         int front, rear = -1;
         int capacity = 0;
-        private T[] queue ;
+        private T[] queueArr;
 
         public CircularQueue(int _capacity)
         {
             this.capacity = _capacity;
-            queue = new T[_capacity];
-            front= rear = -1;
+            this.queueArr = new T[_capacity];
+            this.front = this.rear = -1;
         }
 
         public void EnQueue(T element)
@@ -103,21 +103,22 @@ namespace DsAlgo
             {
                 Console.WriteLine("Queue is Full");
                 throw new Exception("Queue is full");
+                // IncreaseCapacity();
             }
 
             if ((front == -1) && (rear == -1))
             {
                 front = 0;
                 rear = 0;
-                queue[0] = element;
+                queueArr[0] = element;
             }
             else
             {
-                var positiontoAdd =  (rear + 1) % capacity;
+                var positiontoAdd = (rear + 1) % capacity;
                 front = 0;
-                rear = (rear+1) ;
-                queue[positiontoAdd] = element;
-            }            
+                rear = (rear + 1);
+                queueArr[positiontoAdd] = element;
+            }
         }
         public T DeQueue()
         {
@@ -126,7 +127,7 @@ namespace DsAlgo
             {
                 throw new NullReferenceException("List is empty");
             }
-            temp = queue[front];
+            temp = queueArr[front];
             // Condition for only one element
             if (front == rear)
             {
@@ -140,26 +141,55 @@ namespace DsAlgo
             }
             return temp;
         }
-        public T Peek()
+        private T Peek()
         {
-            if(IsEmpty())
+            if (IsEmpty())
             {
                 Console.WriteLine("Queue is Empty");
                 // throw new Exception("Queue is empty");
             }
-            return queue[front];
+            return queueArr[front];
         }
-        public bool IsEmpty()
+        private bool IsEmpty()
         {
             //if ((front == 0 && rear == capacity - 1) || (rear == (front - 1) % (capacity - 1)))
             //{
             //    return false;
             //}
-            return front==-1;
+            return front == -1;
         }
-        public bool IsFull()
-        {           
-            return rear++%capacity==front;
+        private bool IsFull()
+        {
+            return rear++ % capacity == front;
+        }
+        private void IncreaseCapacity()
+        {
+
+            //create new array with double size as the current one.
+            int newCapacity = this.queueArr.Length * 2;
+            T[] newArr = new T[newCapacity];
+            //copy elements to new array, copy from rear to front
+            int tmpFront = front;
+            int index = -1;
+            while (true)
+            {
+                newArr[++index] = this.queueArr[tmpFront];
+                tmpFront++;
+                if (tmpFront == this.queueArr.Length)
+                {
+                    tmpFront = 0;
+                }
+                if (capacity == index + 1)
+                {
+                    break;
+                }
+            }
+            //make new array as queue
+            this.queueArr = newArr;
+            Console.WriteLine("New capacity: " + this.queueArr.Length);
+            //reset front & rear values
+            this.front = 0;
+            this.rear = index;
         }
         public void DisplayQueue()
         {
@@ -183,7 +213,7 @@ namespace DsAlgo
                 // front to rear.
                 for (int i = front; i <= rear; i++)
                 {
-                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(queueArr[i]);
                     Console.WriteLine(" ");
                 }
                 Console.WriteLine();
@@ -198,7 +228,7 @@ namespace DsAlgo
                 // front to max size or last index
                 for (int i = front; i < capacity; i++)
                 {
-                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(queueArr[i]);
                     Console.WriteLine(" ");
                 }
 
@@ -206,11 +236,11 @@ namespace DsAlgo
                 // 0th index till rear position
                 for (int i = 0; i <= rear; i++)
                 {
-                    Console.WriteLine(queue[i]);
+                    Console.WriteLine(queueArr[i]);
                     Console.WriteLine(" ");
                 }
                 Console.WriteLine();
             }
         }
-        }
+    }
 }
